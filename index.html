@@ -8,41 +8,147 @@
 </head>
 
 <body>
-    <div class="content">
+    <header>
+        <h1>Senkan!</h1>
+    </header>
 
-        <header>
-            <h1>Senkan!</h1>
-        </header>
+    <div id="content">
+
+        <section id="main">
+            <div id="gameboards">
+                <div class="player_stats">
+                    <div class="plater_stats_details">
+                        <h4>Ships<br /> Remaining: <span id="player_ships_remaining">5</span></h4>
+                    </div>
+                    <div class="player_board_and_heading">
+                        <h3 class="board_heading">Imperial Japanese Navy (you)</h3>
+                        <p class="help_text">* click Randomise to change ships</p>
+                        <div id="player_grid"></div>
+                    </div>
+                </div>
+                <div class="computer_stats">
+                    <div class="computer_board_and_heading">
+                        <h3 class="board_heading">Unites States Navy (computer)</h3>
+                        <p class="help_text">* computer places random ships</p>
+                        <div id="computer_grid"></div>
+                    </div>
+                    <div class="computer_stats_details">
+                        <h4>Ships<br /> Remaining: <span id="computer_ships_remaining">5</span></h4>
+                    </div>
+                </div>
+            </div>
+            <div id="gameboards_footer">
+                <div class="left_half">
+                    <button id="randomise_button">Randomise</button>
+                    <button id="reset_button">Reset</button>
+                    <button id="start_game_button">Start</button>
+                </div>
+                <div class="right_half"></div>
+            </div>
+        </section>
+
+        <section id="filter"></section>
 
         <section id="document">
-            <h2>// _ Highly Confidential _ //</h2>
+
+            <span style="color:rgb(221, 15, 15)">
+                <h2>//_ Highly Confidential _//</h2>
+            </span>
+
+            <div>
+                <h3>
+                    <span class="fields">Code Name:</span> Operation Iceberg<br />
+                    <span class="fields">Location:</span> Island of Okinawa<br /><br />
+
+                    <span class="fields">Year:</span> 1945 <br />
+                    <span class="fields">Ship Class:</span> Yamato<br />
+                    <span class="fields">Length:</span> 863 ft<br />
+                    <span class="fields">Draft:</span> 35 ft<br />
+                    <span class="fields">Total Displacement:</span> 72,808 t<br /><br />
+                </h3>
+                <img src="../src/images/okinawa_map.png" width="150px">
+            </div>
             <h3>
-                Code Name: Operation Iceberg<br />
-                Location: Island of Okinawa<br /><br />
-
-                Year: 1945 <br />
-                Ship Class: Yamato<br />
-                Length: 863 ft<br />
-                Draft: 35 ft<br />
-                Total Displacement: 72,808 t<br /><br />
-
-                Mission:<br /> This mission is of the utmost importance, The US Naval forces have pushed up further
+                <span class="important">Mission:</span><br /> This mission is of the utmost importance, The
+                US Naval
+                forces have pushed up further
                 inland
                 then we had
                 hoped.<br />
                 High Command is proposing we make a last stand to defend the island of Okinawa before it's completely
                 overtaken by the enemy.<br />
 
-                <span style="color:red">You</span>, General and Captain of the Worlds largest naval Warship "Yamato"
+                <span class="important">You</span>, General and Captain of the Worlds largest naval Warship
+                "Yamato"
                 with the help of a light
                 cruiserweight and<br />
                 eight destroyers must defend Okinawa by any means. Or fight to the end and finish your
                 story.<br /><br />
 
-                We the Imperial Japanese Navy, and nation of Japan stand's behind you Captain!
-
+                We the Imperial Japanese Navy, and the nation of Japan stand's behind you Captain!
             </h3>
-            <p></p>
+            <button id="cancel_briefing_button">Begin The Operation!</button>
+        </section>
+
+        <section id="win" class="display_winner">
+            <img src="../src/images/medal_of_honour.jpg">
+
+            <div>
+                <h2>Congratulations!</h2>
+                <p>You have successfully defeated the US Naval forces and stalled the enemy.<br />
+                    Unfortunately during the battle, the US Have dropped 2 Atomic Bombs on<br />
+                    The Cities of Hiroshima and Nagasaki on August 6 and 9 respectively.<br />
+                    The government has ordered all remaining military fleet and naval forces to retreat the island
+                    and report back to HQ.<br /><br />
+                    The war is finally over.</p>
+                <div class="rating_and_restart">
+                    <div class="star_rating">
+                        <p>Rating: </p>
+                        <div class="stars">
+                            <div>
+                                <img class="star no_star_icon" src="../src/icons/star_icon.svg">
+                                <img class="star star_icon" src="../src/icons/285661_star_icon.svg">
+                            </div>
+                            <div>
+                                <img class="star no_star_icon" src="../src/icons/star_icon.svg">
+                                <img class="star star_icon" src="../src/icons/285661_star_icon.svg">
+                            </div>
+                            <div>
+                                <img class="star no_star_icon" src="../src/icons/star_icon.svg">
+                                <img class="star star_icon" src="../src/icons/285661_star_icon.svg">
+                            </div>
+                            <div>
+                                <img class="star no_star_icon" src="../src/icons/star_icon.svg">
+                                <img class="star star_icon" src="../src/icons/285661_star_icon.svg">
+                            </div>
+                            <div>
+                                <img class="star no_star_icon" src="../src/icons/star_icon.svg">
+                                <img class="star star_icon" src="../src/icons/285661_star_icon.svg">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="restart_button">Restart</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="lose" class="display_winner">
+            <img src="../src/images/Japanese_okinawa_fall.jpeg">
+
+            <div>
+                <h2>The US have captured Okinawa!</h2>
+                <p>We have been overwhelmed by US ground and air forces.<br />
+                    Most of our soliders who havent been killed, have surrendered.<br />
+                    Our commanding officers General Cho and Genral Ushijima have commited ritual suicide due to
+                    shame.<br />
+                    Godspeed to my fellow comerades who died in this battle and for those who have yet to
+                    die in others.<br /><br />
+                    The war is finally over<br />
+                    ...but at what cost?</p>
+                <div class="rating_and_restart">
+                    <button class="restart_button">Restart</button>
+                </div>
+            </div>
         </section>
 
     </div>
