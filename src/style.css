@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap');
+
 :root {
-    background-color: #ffffff;
+    background-color: #2a4f80;
     color: rgb(0, 0, 0);
-    font-family: 'Caveat', cursive;
+    font-family: 'Martian Mono', monospace;
 }
 
 body {
@@ -9,12 +11,155 @@ body {
     padding: 0;
 }
 
-.wrapper {
-    width: 100vw;
+#content {
+    width: 100%;
     height: 100vh;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+}
+
+header {
+    display: flex;
+    width: 100vw;
+    height: 80px;
+    position: fixed;
+    z-index: 2;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+
+header h1 {
+    font-weight: bold;
+}
+
+#main {
+    width: 1300px;
+    height: 600px;
+    background-color: rgba(255, 255, 255, 0.332);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#main h3 {
+    margin-top: 0;
+}
+
+#gameboards {
+    width: 100%;
+    height: 90%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#gameboards_footer {
+    width: 100%;
+    height: 10%;
+
+    background-color: #ffffffa2;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#gameboards_footer .left_half {
+    width: 16%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#gameboards_footer .left_half button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: underline;
+
+    background-color: #ffffff00;
+    border-width: 0;
+    cursor: pointer;
+}
+
+#gameboards_footer .left_half button:hover {
+    color: rgb(19, 187, 10);
+}
+
+#gameboards_footer .right_half {
+    width: 60%;
+}
+
+#player_grid,
+#computer_grid {
+    width: 400px;
+    height: 400px;
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    grid-template-rows: repeat(10, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+}
+
+#player_grid {
+    display: grid;
+    background-image: url("../src/images/pexels-aaron-ulsh-2860705.jpg");
+    background-size: cover;
+}
+
+#computer_grid {
+    display: grid;
+    background-image: url("../src/images/pexels-pok-rie-2049422.jpg");
+    background-size: cover;
+}
+
+.tile {
+    width: 40px;
+    height: 40px;
+
+    font-size: 2rem;
+    background-color: rgba(0, 0, 0, 0.523);
+    color: #ffffff;
+
+    border-width: 1px;
+    border-color: #ffffff;
+    cursor: pointer;
+}
+
+.no_enemies_found_icon {
+    display: none;
+    width: 15%;
+    position: relative;
+    bottom: 25%;
+    filter: invert(100%);
+}
+
+.enemies_found_icon {
+    display: none;
+    width: 60%;
+    position: relative;
+    bottom: 11%;
+}
+
+.board_heading {
+    text-decoration: underline;
+}
+
+.player_stats,
+.computer_stats {
+    display: flex;
+    width: 45%;
+    height: 100%;
+
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 #document {
@@ -22,13 +167,149 @@ body {
     flex-direction: column;
     background-color: aliceblue;
 
-    position: fixed;
+    position: absolute;
     padding: 20px;
-    width: 30vw;
-    left: 30vw;
+    width: max(30vw, 600px);
+    left: 35vw;
+    top: 12vh;
+    z-index: 5;
 
-    filter: drop-shadow(30px 10px 4px #4444dd);
+    filter: drop-shadow(2px 2px 4px #323232);
     border-width: 1px;
     border-color: black;
     border-style: solid;
+}
+
+#document div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#document div h3 {
+    margin: 0;
+    margin-top: 15px;
+}
+
+#document div img {
+    margin-right: 20px;
+}
+
+#document button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    height: 30px;
+
+    color: rgb(221, 15, 15);
+    border-color: rgb(221, 15, 15);
+    background-color: white;
+}
+
+#document button:active {
+    color: black;
+    border-color: black;
+}
+
+#document .fields {
+    color: blue;
+    background-color: white;
+}
+
+#document .important {
+    color: rgb(221, 15, 15);
+    background-color: white;
+}
+
+#win {
+    display: flex;
+}
+
+#lose {
+    display: none;
+}
+
+.display_winner {
+    background-color: #ffffff;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 800px;
+    height: 400px;
+    position: absolute;
+    z-index: 5;
+}
+
+.display_winner img {
+    width: 50%;
+    height: 100%;
+}
+
+.display_winner div {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    margin-right: 10px;
+}
+
+.display_winner div h2 {
+    margin-bottom: 16px;
+    margin-top: 0;
+}
+
+.display_winner div p {
+    margin-top: 5px;
+    font-size: 0.9rem;
+}
+
+.display_winner .rating_and_restart {
+    width: 100%;
+    display: flex;
+}
+
+.display_winner .star_rating {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+}
+
+.display_winner .star {
+    width: 20px;
+    margin-bottom: 8px;
+}
+
+.display_winner .stars div{
+    width: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.display_winner .star_icon{
+    display: none;
+}
+
+.display_winner button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.display_winner .stars {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+
+#filter {
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    background-color: #000000d9;
+
+    transition: ease-in-out 0.15s;
 }

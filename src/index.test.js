@@ -1,8 +1,10 @@
 const myModule = require('./index');
 const Gameboard = myModule.Gameboard;
 const Ship = myModule.Ship;
+const Player = myModule.Player;
+const Computer = myModule.Computer;
 
-describe("Ship class tests", () => {
+describe("Ship class", () => {
 
     test("Ship.hit() register a ship has been hit ship.timesHit to be 1", () => {
         const ship = new Ship();
@@ -19,7 +21,7 @@ describe("Ship class tests", () => {
 
 });
 
-describe("Gameboard class tests", () => {
+describe("Gameboard class", () => {
 
     test("Gameboard.placeShip([1, 4], [1,6]) for create a new ship with coordinates", () => {
         const gameboard = new Gameboard();
@@ -77,6 +79,9 @@ describe("Gameboard class tests", () => {
     });
 });
 
-describe("Player class tests", () => {
-    
+describe("main game loop", () => {
+
+    test("Gameboard.randomiseShips() place 6 random ships on the board", () => {
+        console.log(randomShips());
+    });
 });
