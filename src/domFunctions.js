@@ -90,10 +90,11 @@ export function displayPlayerShips(coordinates) {
 
 export function displayComputerWinner() {
     const backgroundFilter = document.getElementById("filter");
+    const winTextContainer = document.getElementById("lose");
     backgroundFilter.style.display = "flex";
     setTimeout(() => {
-        backgroundFilter.style.backgroundColor = "##000000d9";
-        document.getElementById("lose").style.display = "flex";
+        backgroundFilter.style.backgroundColor = "#000000d9";
+        winTextContainer.style.display = "flex";
     }, 400);
 }
 
@@ -107,8 +108,11 @@ export function displayPlayerWinner(shipsDestroyed) {
     }, 400);
 
     for (let i = 0; i <= shipsDestroyed; i++) {
-        const stars = document.querySelectorAll(".stars");
+        const stars = document.querySelectorAll(".star");
         stars.forEach(star => {
+            if (star.id === `star${i}`) {
+                star.src = "../src/icons/285661_star_icon.svg";
+            }
         });
     }
 

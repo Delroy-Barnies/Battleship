@@ -78,10 +78,3 @@ describe("Gameboard class", () => {
         expect(gameboard.hasShipsLeft()).toBe(true);
     });
 });
-
-describe("main game loop", () => {
-
-    test("Gameboard.randomiseShips() place 6 random ships on the board", () => {
-        console.log(randomShips());
-    });
-});

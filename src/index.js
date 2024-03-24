@@ -1,8 +1,8 @@
-import "./style.css";
-import {
+//import "./style.css";
+/*import {
     displayAttackOnDom, displayShipsRemaining, displayPlayerShips, removeHelpText
     , displayComputerWinner, displayPlayerWinner
-} from "./domFunctions.js";
+} from "./domFunctions.js";*/
 
 class Ship {
     constructor(coordinates = [], length = 0, timesHit = 0, sunk = false) {
@@ -27,6 +27,7 @@ class Gameboard {
         this.board = [];
         this.ships = [];
         this.sunkenShips = [];
+        this.tilesHit = [];
     }
 
     initializeBoard() {
@@ -111,16 +112,13 @@ class Gameboard {
         this.ships = [];
         let shipLengths = [5, 6, 4, 3, 2];
         const randomShip = (lenOfShip) => {
-
             let startX = this._getRandomInt(0, 9);
             let startY = this._getRandomInt(0, 9);
             let endX = 0;
             let endY = 0;
-
             if ((startX + lenOfShip) > 9 && (startY + lenOfShip) > 9) {
                 return randomShip(lenOfShip);
             }
-            // [4, 3] ship is of length 5;
             if (startX > startY) {
                 endY = (startY + lenOfShip) - 1;
                 endX = startX;
@@ -129,13 +127,10 @@ class Gameboard {
                 endX = (startX + lenOfShip) - 1;
                 endY = startY;
             }
-
             if (this.ships.length != 0) {
                 this.placeShip([startX, startY], [endX, endY]);
                 const newShip = this.ships.pop();
-
                 let coords = this.getAllShipCoordinates();
-
                 const currantShipCoords = newShip.coordinates;
                 for (let i = 0; i < coords.length; i++) {
                     for (let j = 0; j < currantShipCoords.length; j++) {
@@ -191,6 +186,7 @@ class Computer {
         this.gameboard = new Gameboard();
         this.hasShips = false;
         this.numberOfShips = 0;
+        this.nextAttack = null;
     }
 }
 
@@ -199,14 +195,21 @@ function handleAttack(tile, player) {
     let path = stringPath.map(Number);
     let numOfShipsLeft = player.gameboard.ships.length;
     let isShipFound = player.gameboard.receiveAttack(path);
-
     displayAttackOnDom(isShipFound, path, player.player);
     displayShipsRemaining(player.gameboard.ships.length, player.player);
-
     if (numOfShipsLeft > player.gameboard.ships.length) {
         let adjacentTiles = adjacentTilesReveal(player);
         attackAllAdjacentTiles(adjacentTiles, player);
     }
+}
+
+function handleAttackWithoutAdjacentTiles(tile, player) {
+    let stringPath = tile.id.split(", ");
+    let path = stringPath.map(Number);
+    let numOfShipsLeft = player.gameboard.ships.length;
+    let isShipFound = player.gameboard.receiveAttack(path);
+    displayAttackOnDom(isShipFound, path, player.player);
+    displayShipsRemaining(player.gameboard.ships.length, player.player);
 }
 
 function adjacentTilesReveal(player) {
@@ -247,6 +250,31 @@ function attackAllAdjacentTiles(adjacentTiles, player) {
     }
 }
 
+function getRandomTile(player) {
+    const grid = document.getElementById(`${player.player}_grid`);
+    const path = player.gameboard.randomAttack();
+    let tileAlreadyHit = false;
+    player.gameboard.tilesHit.forEach(tile => {
+        if (tile[0] === path[0] && tile[1] === path[1]) {
+            tileAlreadyHit = true;
+        }
+    });
+    if (tileAlreadyHit) {
+        return getRandomTile(player);
+    } else {
+        player.gameboard.tilesHit.push(path);
+        const pathString = path.join(", ");
+        let tile;
+        grid.querySelectorAll(".tile").forEach(coord => {
+            if (coord.id === pathString) {
+                tile = coord;
+            }
+        });
+        return tile;
+    }
+}
+
+
 function game() {
 
     const computer = new Computer();
@@ -256,6 +284,7 @@ function game() {
     const player = new Player();
     player.gameboard.initializeBoard();
     player.gameboard.setRandomShips();
+
     displayPlayerShips(player.gameboard.getAllShipCoordinates());
 
     document.getElementById("randomise_button").addEventListener("click", () => {
@@ -271,14 +300,21 @@ function game() {
 
         document.getElementById("start_game_button").disabled = true;
         document.getElementById("randomise_button").disabled = true;
-
         removeHelpText();
+
+        let difficultySetting = document.getElementById("difficulty_slider");
+        difficultySetting.disabled = true;
+
         const grid = document.getElementById(`${computer.player}_grid`);
         grid.querySelectorAll(".tile").forEach(tile => {
             tile.addEventListener("click", function handleTileClicks() {
                 if (tile.className != "tile clicked") {
-                    handleAttack(tile, computer);
-                    handleAttack(getRandomTile(computer), player);
+
+                    if (difficultySetting.checked) handleAttackWithoutAdjacentTiles(tile, computer);
+                    else handleAttack(tile, computer);
+                    let compTile = getRandomTile(computer);
+                    handleAttack(compTile, player);
+
                     if (!computer.gameboard.hasShipsLeft()) {
                         console.log(player.gameboard.ships.length);
                         displayPlayerWinner(player.gameboard.ships.length);
@@ -290,23 +326,6 @@ function game() {
             });
         });
     });
-}
-
-function getRandomTile(player) {
-    const grid = document.getElementById(`${player.player}_grid`);
-    const path = player.gameboard.randomAttack();
-    const pathString = path.join(", ");
-    let tile;
-    grid.querySelectorAll(".tile").forEach(coord => {
-        if (coord.id === pathString) {
-            tile = coord;
-        }
-    });
-    if (tile.className === "tile clicked") {
-        getRandomTile(player);
-    }
-    return tile;
-
 }
 
 game();

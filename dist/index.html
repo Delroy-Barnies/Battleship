@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Senkan!</title>
+    <title>Senkan!♒︎</title>
 </head>
 
 <body>
@@ -42,6 +42,13 @@
                     <button id="randomise_button">Randomise</button>
                     <button id="reset_button">Reset</button>
                     <button id="start_game_button">Start</button>
+                    <div>
+                        <label class="switch">
+                            <input id="difficulty_slider" type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <p id="difficulty_label">(easy, hard)</p>
+                    </div>
                 </div>
                 <div class="right_half"></div>
             </div>
@@ -69,7 +76,7 @@
                 <img src="../src/images/okinawa_map.png" width="150px">
             </div>
             <h3>
-                <span class="important">Mission:</span><br /> This mission is of the utmost importance, The
+                <span class="important">Briefing:</span><br /> This mission is of the utmost importance, The
                 US Naval
                 forces have pushed up further
                 inland
@@ -82,8 +89,7 @@
                 "Yamato"
                 with the help of a light
                 cruiserweight and<br />
-                eight destroyers must defend Okinawa by any means. Or fight to the end and finish your
-                story.<br /><br />
+                three destroyers must defend Okinawa by any means, or fight to the very end.<br /><br />
 
                 We the Imperial Japanese Navy, and the nation of Japan stand's behind you Captain!
             </h3>
@@ -100,31 +106,16 @@
                     The Cities of Hiroshima and Nagasaki on August 6 and 9 respectively.<br />
                     The government has ordered all remaining military fleet and naval forces to retreat the island
                     and report back to HQ.<br /><br />
-                    The war is finally over.</p>
+                    The war is finally over.<br />
                 <div class="rating_and_restart">
                     <div class="star_rating">
                         <p>Rating: </p>
                         <div class="stars">
-                            <div>
-                                <img class="star no_star_icon" src="../src/icons/star_icon.svg">
-                                <img class="star star_icon" src="../src/icons/285661_star_icon.svg">
-                            </div>
-                            <div>
-                                <img class="star no_star_icon" src="../src/icons/star_icon.svg">
-                                <img class="star star_icon" src="../src/icons/285661_star_icon.svg">
-                            </div>
-                            <div>
-                                <img class="star no_star_icon" src="../src/icons/star_icon.svg">
-                                <img class="star star_icon" src="../src/icons/285661_star_icon.svg">
-                            </div>
-                            <div>
-                                <img class="star no_star_icon" src="../src/icons/star_icon.svg">
-                                <img class="star star_icon" src="../src/icons/285661_star_icon.svg">
-                            </div>
-                            <div>
-                                <img class="star no_star_icon" src="../src/icons/star_icon.svg">
-                                <img class="star star_icon" src="../src/icons/285661_star_icon.svg">
-                            </div>
+                            <img class="star" id="star1" src="../src/icons/star_icon.svg">
+                            <img class="star" id="star2" src="../src/icons/star_icon.svg">
+                            <img class="star" id="star3" src="../src/icons/star_icon.svg">
+                            <img class="star" id="star4" src="../src/icons/star_icon.svg">
+                            <img class="star" id="star5" src="../src/icons/star_icon.svg">
                         </div>
                     </div>
                     <button class="restart_button">Restart</button>
@@ -141,10 +132,10 @@
                     Most of our soliders who havent been killed, have surrendered.<br />
                     Our commanding officers General Cho and Genral Ushijima have commited ritual suicide due to
                     shame.<br />
-                    Godspeed to my fellow comerades who died in this battle and for those who have yet to
+                    Peace be with my fellow comerades who died in this battle and for those who have yet to
                     die in others.<br /><br />
                     The war is finally over<br />
-                    ...but at what cost?</p>
+                    but at what cost?</p>
                 <div class="rating_and_restart">
                     <button class="restart_button">Restart</button>
                 </div>
