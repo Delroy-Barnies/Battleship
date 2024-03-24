@@ -7,11 +7,11 @@ function createTile(path) {
     tile.id = `${path[0]}, ${path[1]}`;
 
     const noEnemiesFoundIcon = document.createElement("img");
-    noEnemiesFoundIcon.src = "../src/icons/2203520_circle_dot_record_round_icon.svg";
+    noEnemiesFoundIcon.src = require("./icons/2203520_circle_dot_record_round_icon.svg");
     noEnemiesFoundIcon.className = "no_enemies_found_icon";
 
     const enemiesFoundIcon = document.createElement("img");
-    enemiesFoundIcon.src = "../src/icons/116853_fire_icon.svg";
+    enemiesFoundIcon.src = require("./icons/116853_fire_icon.svg");
     enemiesFoundIcon.className = "enemies_found_icon";
 
     tile.appendChild(enemiesFoundIcon);
@@ -111,7 +111,7 @@ export function displayPlayerWinner(shipsDestroyed) {
         const stars = document.querySelectorAll(".star");
         stars.forEach(star => {
             if (star.id === `star${i}`) {
-                star.src = "../src/icons/285661_star_icon.svg";
+                star.src = require("./icons/285661_star_icon.svg");
             }
         });
     }
